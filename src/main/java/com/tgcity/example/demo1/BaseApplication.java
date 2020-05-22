@@ -4,12 +4,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * @author TGCity
+ */
 @ComponentScan
 @EnableAutoConfiguration
-public class Demo1Application {
+public class BaseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Demo1Application.class, args);
+		SpringApplication.run(BaseApplication.class, args);
 	}
 
 }
