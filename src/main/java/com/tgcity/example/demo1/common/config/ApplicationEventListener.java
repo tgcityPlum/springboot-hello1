@@ -1,4 +1,4 @@
-package com.tgcity.example.demo1.config;
+package com.tgcity.example.demo1.common.filter.config;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

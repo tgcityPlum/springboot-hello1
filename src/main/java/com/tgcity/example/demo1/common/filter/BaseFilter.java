@@ -1,4 +1,4 @@
-package com.tgcity.example.demo1.config;
+package com.tgcity.example.demo1.common.filter;
 
 
 import com.alibaba.fastjson.JSONObject;
