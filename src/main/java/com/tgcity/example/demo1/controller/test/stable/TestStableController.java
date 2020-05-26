@@ -1,4 +1,4 @@
-package com.tgcity.example.demo1.controller.hello;
+package com.tgcity.example.demo1.controller.test.stable;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tgcity.example.demo1.common.request.test.TestPostReq;
@@ -19,10 +19,10 @@ import java.util.Map;
  * @description 测试控制器
  */
 @RestController
-@RequestMapping("/test")
-@Api(tags = "测试控制器-hello")
+@RequestMapping("/test/stable")
+@Api(tags = "测试控制器-test stable")
 @Slf4j
-public class HelloController {
+public class TestStableController {
 
     /**
      * 直接get请求测试
