@@ -18,11 +18,17 @@ mybatis-plus:
 # 设置数据库
 spring:
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.15.36:3306/water?serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
+    druid:
+      username: root
+      password: root
+      url: jdbc:mysql://192.168.15.36:3306/water?serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      filter:
+        stat:
+          merge-sql: true
+          log-slow-sql: true
+        filters: stat,wall
 
