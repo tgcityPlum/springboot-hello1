@@ -1,4 +1,4 @@
-package com.tgcity.example.demo1.controller.test.database;
+package com.tgcity.example.demo1.controller.mobile.test;
 
 import com.tgcity.example.demo1.dal.entity.user.UserEntity;
 import com.tgcity.example.demo1.service.user.UserService;
@@ -21,9 +21,9 @@ import java.util.Map;
  * @description 测试数据库连接
  */
 @RestController
-@RequestMapping("/test/database")
+@RequestMapping("/mobile/test/database")
 @Api(tags = "2、数据库连接的测试")
-public class TestDatabaseController {
+public class DatabaseController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -34,7 +34,7 @@ public class TestDatabaseController {
     /**
      * 测试数据库连接情况
      */
-    @GetMapping("/getData")
+    @GetMapping("getData")
     @ApiOperation(value = "jdbcTemplate连接测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Map<String, Object>> getData() {
         String sql = "SELECT * FROM `user`;";
@@ -45,7 +45,7 @@ public class TestDatabaseController {
      * 测试Mybatis连接数据库
      * 获取用户账号
      */
-    @GetMapping("/getMybatisData")
+    @GetMapping("getMybatisData")
     @ApiOperation(value = "获取用户名", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String getMybatisData() {
         try {
@@ -60,7 +60,7 @@ public class TestDatabaseController {
     /**
      * 获取用户列表
      */
-    @GetMapping("/getAllUsers")
+    @GetMapping("getAllUsers")
     @ApiOperation(value = "获取用户列表", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<UserEntity> getAllUsers() {
         try {

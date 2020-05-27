@@ -1,9 +1,9 @@
 package com.tgcity.example.demo1.common.config;
 
-import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -19,24 +19,60 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /**
+     * 定义分隔符,配置Swagger多包
+     */
+    private static final String CONTROLLER_PATH = "com.tgcity.example.demo1.controller";
+
     @Bean
-    public Docket createRestApi() {
+    public Docket createMobileRestApi() {
 
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
+                .groupName("移动端接口")
+                .apiInfo(apiInfo("Water Mobile Rest Api", "水务移动端接口","1.0"))
+                .useDefaultResponseMessages(true)
+                .forCodeGeneration(false)
                 .select()
-                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .apis(RequestHandlerSelectors.basePackage(CONTROLLER_PATH))
+//                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .paths(PathSelectors.regex("/mobile.*"))
                 .build();
     }
 
-    private ApiInfo apiInfo() {
+    @Bean
+    public Docket createFrontEndRestApi() {
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("前端接口")
+                .apiInfo(apiInfo("Water Front End Rest Api", "水务前端接口","1.0"))
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(CONTROLLER_PATH))
+//                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .paths(PathSelectors.regex("/frontend.*"))
+                .build();
+    }
+
+    @Bean
+    public Docket createBackEndRestApi() {
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("后端接口")
+                .apiInfo(apiInfo("Water Front End Rest Api", "水务后端接口","1.0"))
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(CONTROLLER_PATH))
+//                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .paths(PathSelectors.regex("/backend.*"))
+                .build();
+    }
+
+    private ApiInfo apiInfo(String title, String description, String version) {
         return new ApiInfoBuilder()
-                .title("water Rest Api")
-                .description("水务后台接口")
+                .title(title)
+                .description(description)
                 .termsOfServiceUrl("")
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-                .version("1.0")
+                .version(version)
                 .build();
     }
 
