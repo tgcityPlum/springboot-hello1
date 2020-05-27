@@ -16,11 +16,11 @@ import java.util.Map;
 /**
  * @author: TGCit
  * @create: 2020/5/22
- * @description 测试控制器
+ * @description 常见请求的测试
  */
 @RestController
 @RequestMapping("/test/stable")
-@Api(tags = "测试控制器-test stable")
+@Api(tags = "1、常见请求的测试")
 @Slf4j
 public class TestStableController {
 
@@ -28,7 +28,7 @@ public class TestStableController {
      * 直接get请求测试
      */
     @GetMapping("/getData")
-    @ApiOperation(value = "get返回string", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "get无参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String getData() {
         Map<String, Object> map = new HashMap<>(2);
         map.put("code", 1);
@@ -42,7 +42,7 @@ public class TestStableController {
      * @param phone string
      */
     @GetMapping("/getDataParam")
-    @ApiOperation(value = "", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "get携参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParam(name = "phone", value = "手机号", dataType = "string", required = true)
     public String getDataParamStyleOne(@RequestParam("phone") String phone) {
         log.info("phone=" + phone);
@@ -58,7 +58,7 @@ public class TestStableController {
      * @param phone string
      */
     @GetMapping("/getData/param/{phone}")
-    @ApiOperation(value = "", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "get动态携参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String getDataParamStyleTwo(@PathVariable("phone") String phone) {
         log.info("phone=" + phone);
         Map<String, Object> map = new HashMap<>(2);
@@ -74,7 +74,7 @@ public class TestStableController {
      * @param pageSize int
      */
     @PostMapping(value = "/postDate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ApiOperation(value = "post返回string", httpMethod = "POST", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiOperation(value = "post多参测试", httpMethod = "POST", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "pageNo", value = "页号", dataType = "int", required = true),
             @ApiImplicitParam(name = "pageSize", value = "数量", dataType = "int", required = true)
@@ -93,7 +93,7 @@ public class TestStableController {
      * @param testPostReq TestPostReq
      */
     @PostMapping(value = "/postDateBody")
-    @ApiOperation(value = "post返回string", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "post对象测试", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String postDataBody(@RequestBody TestPostReq testPostReq) {
         log.info("testPostReq=" + testPostReq.toString());
         Map<String, Object> map = new HashMap<>(2);
