@@ -11,4 +11,11 @@
             id = #{id}
     </select>
 
+    <select id="getUserList" resultType="com.tgcity.example.demo1.dal.entity.user.UserEntity">
+        select
+            *
+        from
+            user
+    </select>
+
 </mapper>

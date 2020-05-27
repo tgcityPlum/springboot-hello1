@@ -38,9 +38,10 @@ public class TestDatabaseController {
 
     /**
      * 测试Mybatis连接数据库
+     * 获取用户账号
      */
     @GetMapping("/getMybatisData")
-    public String getMybatisData(){
+    public String getMybatisData() {
         try {
             return userService.getUserName();
         } catch (Exception e) {
@@ -48,5 +49,18 @@ public class TestDatabaseController {
         }
 
         return "";
+    }
+
+    /**
+     * 获取用户列表
+     */
+    @GetMapping("/getAllUsers")
+    public List<UserEntity> getAllUsers() {
+        try {
+            return userService.getUserList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 }
