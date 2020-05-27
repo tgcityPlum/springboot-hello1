@@ -1,12 +1,9 @@
 package com.tgcity.example.demo1.service.user.impl;
 
-import com.tgcity.example.demo1.dal.entity.user.UserEntity;
 import com.tgcity.example.demo1.dal.mappers.user.UserMapper;
 import com.tgcity.example.demo1.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author: TGCity
@@ -20,8 +17,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<UserEntity> getUserList() throws Exception {
-
-        return userMapper.getUserList();
+    public String getUserName() throws Exception {
+        return userMapper.getUserName(1);
     }
 }

@@ -1,0 +1,28 @@
+# 设置端口
+server:
+  port: 10324
+
+# 设置mybatis
+mybatis-plus:
+  mapper-locations: classpath:mappers/**/*.xml
+  typeAliasesPackage: com.tgcity.example.demo1.dal.entity
+  global-config:
+    db-config:
+      logic-delete-value: true # 逻辑已删除值(默认为 true)
+      logic-not-delete-value: false # 逻辑未删除值(默认为 false)
+      updateStrategy: IGNORED  #更新的时候，设置为忽略策略，可以更新字段为null的值
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+
+# 设置数据库
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.15.36:3306/water?serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+

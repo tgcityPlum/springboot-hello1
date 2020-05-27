@@ -40,13 +40,13 @@ public class TestDatabaseController {
      * 测试Mybatis连接数据库
      */
     @GetMapping("/getMybatisData")
-    public List<UserEntity> getMybatisData(){
+    public String getMybatisData(){
         try {
-            return userService.getUserList();
+            return userService.getUserName();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return new ArrayList<>();
+        return "";
     }
 }

@@ -1,9 +1,9 @@
 package com.tgcity.example.demo1.dal.mappers.user;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.tgcity.example.demo1.dal.entity.user.UserEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @author: TGCity
@@ -12,12 +12,12 @@ import java.util.List;
  */
 
 @Repository
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<UserEntity> {
 
     /**
      * 获取所有用户
      *
-     * @return List<UserEntity>
+     * @return String
      */
-    List<UserEntity> getUserList();
+    String getUserName(@Param("id") int id);
 }
