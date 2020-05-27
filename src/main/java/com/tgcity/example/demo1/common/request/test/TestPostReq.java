@@ -1,5 +1,7 @@
 package com.tgcity.example.demo1.common.request.test;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -8,15 +10,13 @@ import lombok.Data;
  * @description post请求体测试类
  */
 @Data
+@ApiModel(description = "测试表单")
 public class TestPostReq {
 
-    /**
-     * 页码
-     */
+    @ApiModelProperty(name = "pageNo", value = "页码", required = false, example = "1")
     private int pageNo;
-    /**
-     * 数量
-     */
+
+    @ApiModelProperty(name = "pageSize",value = "数量",required = true,example = "10")
     private int pageSize;
 
 }

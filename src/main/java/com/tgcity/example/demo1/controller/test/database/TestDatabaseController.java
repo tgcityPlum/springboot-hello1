@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/test/database")
-@Api(tags = "2、测试数据库连接")
+@Api(tags = "2、数据库连接的测试")
 public class TestDatabaseController {
 
     @Autowired

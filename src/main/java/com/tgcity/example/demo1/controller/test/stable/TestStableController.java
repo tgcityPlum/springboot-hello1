@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class TestStableController {
     /**
      * 直接get请求测试
      */
-    @GetMapping("/getData")
+    @GetMapping("/get/parameter/no")
     @ApiOperation(value = "get无参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String getData() {
         Map<String, Object> map = new HashMap<>(2);
@@ -41,7 +42,7 @@ public class TestStableController {
      *
      * @param phone string
      */
-    @GetMapping("/getDataParam")
+    @GetMapping("/get/parameter/static")
     @ApiOperation(value = "get携参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParam(name = "phone", value = "手机号", dataType = "string", required = true)
     public String getDataParamStyleOne(@RequestParam("phone") String phone) {
@@ -57,7 +58,7 @@ public class TestStableController {
      *
      * @param phone string
      */
-    @GetMapping("/getData/param/{phone}")
+    @GetMapping("/get/parameter/dynamic/{phone}")
     @ApiOperation(value = "get动态携参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String getDataParamStyleTwo(@PathVariable("phone") String phone) {
         log.info("phone=" + phone);
@@ -73,7 +74,7 @@ public class TestStableController {
      * @param pageNo   int
      * @param pageSize int
      */
-    @PostMapping(value = "/postDate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/post/parameter", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation(value = "post多参测试", httpMethod = "POST", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "pageNo", value = "页号", dataType = "int", required = true),
@@ -92,8 +93,9 @@ public class TestStableController {
      *
      * @param testPostReq TestPostReq
      */
-    @PostMapping(value = "/postDateBody")
+    @PostMapping(value = "/post/body")
     @ApiOperation(value = "post对象测试", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParam(name = "testPostReq",value = "请求体",dataType = "TestPostReq",required = true)
     public String postDataBody(@RequestBody TestPostReq testPostReq) {
         log.info("testPostReq=" + testPostReq.toString());
         Map<String, Object> map = new HashMap<>(2);
