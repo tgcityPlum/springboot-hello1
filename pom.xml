@@ -25,6 +25,8 @@
         <commons-pool2.version>2.6.2</commons-pool2.version>
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
         <druid.version>1.1.17</druid.version>
+        <shiro.version>1.4.1</shiro.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -147,6 +149,32 @@
             <artifactId>commons-pool2</artifactId>
             <version>${commons-pool2.version}</version>
         </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+
+        <!-- apache-commons -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
 
     </dependencies>
 

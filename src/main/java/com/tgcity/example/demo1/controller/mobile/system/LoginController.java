@@ -1,15 +1,19 @@
 package com.tgcity.example.demo1.controller.mobile.system;
 
-import com.alibaba.fastjson.JSONObject;
+import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
+import com.tgcity.example.demo1.common.model.response.BaseResponse;
+import com.tgcity.example.demo1.service.system.AccountService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
 
 /**
  * @author: TGCity
@@ -18,39 +22,28 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/mobile/system/login")
-@Api(tags = "3、系统接口", value = "登录模块")
+@Api(tags = "3、登录模块")
 public class LoginController {
+
+    @Autowired
+    private AccountService accountService;
+
     /**
-     * 1、校验用户是否存在
+     * 1、用户登录
      */
-    /**
-     * 直接get请求测试
-     */
-    @GetMapping("get/parameter/no/2")
-    @ApiOperation(value = "get无参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String getData() {
-        Map<String, Object> map = new HashMap<>(2);
-        map.put("code", 1);
-        map.put("message", "get返回Data成功");
-        return JSONObject.toJSONString(map);
-    }
+
+
     /**
      * 2、注册用户
      */
+    @PostMapping("register")
+    @ApiOperation(value = "注册用户", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParam(name = "registerReq", value = "注册表单", required = true, dataType = "RegisterReq")
+    public BaseResponse register(@Valid @RequestBody RegisterReq registerReq) {
+        return accountService.register(registerReq);
+    }
 
     /**
-     * 3、获取用户信息
-     */
-
-    /**
-     * 4、修改用户密码
-     */
-
-    /**
-     * 5、找回用户密码
-     */
-
-    /**
-     * 7、退出登录
+     * 3、退出登录
      */
 }

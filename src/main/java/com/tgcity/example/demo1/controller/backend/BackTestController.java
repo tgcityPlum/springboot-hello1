@@ -1,10 +1,8 @@
 package com.tgcity.example.demo1.controller.backend;
 
 import com.alibaba.fastjson.JSONObject;
-import com.tgcity.example.demo1.common.request.test.TestPostReq;
+import com.tgcity.example.demo1.common.model.request.test.TestPostReq;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

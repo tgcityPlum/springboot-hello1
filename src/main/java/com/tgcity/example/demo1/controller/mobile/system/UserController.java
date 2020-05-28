@@ -18,14 +18,9 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/mobile/user")
-@Api(tags = "3、系统接口", value = "用户模块")
+@Api(tags = "4、用户模块")
 public class UserController {
-    /**
-     * 1、校验用户是否存在
-     */
-    /**
-     * 直接get请求测试
-     */
+
     @GetMapping("get/parameter/no/1")
     @ApiOperation(value = "get无参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String getData() {
@@ -36,28 +31,19 @@ public class UserController {
     }
 
     /**
-     * 2、注册用户
+     * 1、获取用户信息
      */
 
     /**
-     * 3、获取用户信息
+     * 2、修改用户密码
      */
 
     /**
-     * 4、修改用户密码
+     * 3、找回用户密码
      */
 
     /**
-     * 5、找回用户密码
+     * 4、修改用户信息
      */
-
-    /**
-     * 6、修改用户信息
-     */
-
-    /**
-     * 7、退出登录
-     */
-
 
 }

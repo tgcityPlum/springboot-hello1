@@ -1,4 +1,4 @@
-package com.tgcity.example.demo1.common.request.test;
+package com.tgcity.example.demo1.common.model.request.test;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

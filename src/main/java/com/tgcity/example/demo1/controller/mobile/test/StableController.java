@@ -1,7 +1,7 @@
 package com.tgcity.example.demo1.controller.mobile.test;
 
 import com.alibaba.fastjson.JSONObject;
-import com.tgcity.example.demo1.common.request.test.TestPostReq;
+//import com.tgcity.example.demo1.common.model.request.test.TestPostReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -92,7 +92,7 @@ public class StableController {
      *
      * @param testPostReq TestPostReq
      */
-    @PostMapping(value = "post/body")
+   /* @PostMapping(value = "post/body")
     @ApiOperation(value = "post对象测试", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParam(name = "testPostReq",value = "请求体",dataType = "TestPostReq",required = true)
     public String postDataBody(@RequestBody TestPostReq testPostReq) {
@@ -101,6 +101,6 @@ public class StableController {
         map.put("code", 1);
         map.put("message", "post返回Data成功");
         return JSONObject.toJSONString(map);
-    }
+    }*/
 
 }
