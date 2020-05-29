@@ -1,16 +1,17 @@
 package com.tgcity.example.demo1.service.system.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.Message;
+import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
 import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
+import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
 import com.tgcity.example.demo1.service.system.AccountService;
-import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -56,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
         }
         //加密密码
         String salt = RandomStringUtils.randomAlphanumeric(20);
+        String password = ShiroUtils.sha256(registerReq.getPassword(), salt);
         //平台
         String systemType;
         switch (registerReq.getSystem()) {
@@ -81,8 +83,8 @@ public class AccountServiceImpl implements AccountService {
         accountEntity
                 .setUserId(userId)
                 .setAccount(registerReq.getAccount())
-                .setPassword(registerReq.getPassword())
-                .setPasswordEncryption(ShiroUtils.sha256(registerReq.getPassword(), salt))
+                .setPassword(password)
+                .setPasswordEncryption(salt)
                 .setPlatform(systemType);
         //处理平台
         accountMapper.insert(accountEntity);
@@ -97,12 +99,9 @@ public class AccountServiceImpl implements AccountService {
             UsernamePasswordToken token = new UsernamePasswordToken(account, password);
             subject.login(token);
 
-//            Map<String, Object> map = new HashMap<>(1);
-            //用户基本信息
             AccountEntity user = (AccountEntity) SecurityUtils.getSubject().getPrincipal();
             LoginUserResponse loginUserResponse = LoginUserResponse.of();
             BeanUtils.copyProperties(user, loginUserResponse);
-//            map.put("account", loginUserResponse);
 
             return BaseResponse.ok(loginUserResponse);
         } catch (UnknownAccountException e) {
@@ -125,7 +124,7 @@ public class AccountServiceImpl implements AccountService {
             return BaseResponse.buildSuccess(Message.NOT_LOGGED_IN).build();
         }
         UserInfoResponse userInfoResponse = UserInfoResponse.of();
-        BeanUtils.copyProperties(user,userInfoResponse);
+        BeanUtils.copyProperties(user, userInfoResponse);
         return BaseResponse.ok(userInfoResponse);
     }
 }

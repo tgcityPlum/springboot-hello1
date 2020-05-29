@@ -1,17 +1,11 @@
 package com.tgcity.example.demo1.common.shiro;
 
-import com.tgcity.example.demo1.common.shiro.filter.CustomFormAuthenticationFilter;
 import com.tgcity.example.demo1.common.shiro.realm.MyShiroRealm;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.servlet.Filter;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Shiro的配置文件

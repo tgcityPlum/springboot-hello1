@@ -9,11 +9,10 @@
 package com.tgcity.example.demo1.common.shiro.realm;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
-import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -21,7 +20,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,8 +30,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class MyShiroRealm extends AuthorizingRealm {
-//    @Autowired
-//    private AuthService authService;
 
     @Autowired
     private AccountMapper accountMapper;
@@ -44,22 +40,8 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         log.debug("------PC------shiro授权---------------");
-        /*AccountEntity accountEntity = (AccountEntity) principals.getPrimaryPrincipal();
-        if (accountEntity == null) {
-            return null;
-        }
-        //用户权限列表
-        Set<String> permsSet = authService.selectAuthResourceCode(accountEntity.getUserId());
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.setStringPermissions(permsSet);
-        return info;*/
-
         //在这里进行一些授权 分发权限等等
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        Subject subject = SecurityUtils.getSubject();
-        //接受AuthenticationInfo传递过来的User对象
-        AccountEntity user = (AccountEntity) subject.getPrincipal();
-        /* System.out.println(user.getShiro());*/
         //设置权限
         info.addStringPermission("user:root");
         return info;
