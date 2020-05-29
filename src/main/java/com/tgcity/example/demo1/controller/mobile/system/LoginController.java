@@ -10,7 +10,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SessionKey;
@@ -47,14 +46,6 @@ public class LoginController {
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", required = true)
     })
     public BaseResponse<LoginUserResponse> login(String account, String password) {
-        //校验账号信息
-        if (StringUtils.isBlank(account)) {
-            return BaseResponse.buildSuccess(Message.USER_ACCOUNT_NOT_EMPTY).build();
-        }
-        //校验密码
-        if (StringUtils.isBlank(password)) {
-            return BaseResponse.buildSuccess(Message.USER_PASSWORD_NOT_EMPTY).build();
-        }
         return accountService.login(account, password);
     }
 
@@ -66,14 +57,6 @@ public class LoginController {
     @ApiOperation(value = "注册用户", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParam(name = "registerReq", value = "注册表单", required = true, dataType = "RegisterReq")
     public BaseResponse register(@Valid @RequestBody RegisterReq registerReq) {
-        //校验账号信息
-        if (StringUtils.isBlank(registerReq.getAccount())) {
-            return BaseResponse.buildSuccess(Message.USER_ACCOUNT_NOT_EMPTY).build();
-        }
-        //校验密码
-        if (StringUtils.isBlank(registerReq.getPassword())) {
-            return BaseResponse.buildSuccess(Message.USER_PASSWORD_NOT_EMPTY).build();
-        }
         return accountService.register(registerReq);
     }
 
@@ -94,12 +77,12 @@ public class LoginController {
     @ApiOperation(value = "用户是否登录失效", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<Boolean> isValid(HttpServletRequest request, HttpServletResponse response) {
         try {
-            SessionKey key = new WebSessionKey(request,response);
+            SessionKey key = new WebSessionKey(request, response);
             Session session = SecurityUtils.getSecurityManager().getSession(key);
             Object attribute = session.getAttribute(DefaultSubjectContext.AUTHENTICATED_SESSION_KEY);
-            if (attribute == null){
+            if (attribute == null) {
                 return BaseResponse.buildSuccess(Message.NOT_LOGGED_IN).build();
-            }else {
+            } else {
                 return BaseResponse.ok(true);
             }
         } catch (Exception e) {

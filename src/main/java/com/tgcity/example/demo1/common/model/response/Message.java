@@ -32,8 +32,6 @@ public enum Message {
     VERIFICATION_CODE_EXPIRED(403, "验证码已失效"),
     NO_PERMISSION(403, "无权限"),
 
-    USER_ACCOUNT_NOT_EMPTY(404, "用户账号不得为空"),
-    USER_PASSWORD_NOT_EMPTY(404, "用户密码不得为空"),
     USER_NOT_FOUND(404, "该用户不存在"),
     NODE_NOT_FOUND(404, "该监测点不存在"),
     RIVER_NOT_FOUND(404, "该河流不存在"),
