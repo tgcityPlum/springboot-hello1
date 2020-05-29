@@ -1,11 +1,10 @@
 package com.tgcity.example.demo1.controller.mobile.system;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.Message;
 import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
-import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
+import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import com.tgcity.example.demo1.service.system.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,10 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -77,4 +73,11 @@ public class LoginController {
     /**
      * 3、退出登录
      */
+    @GetMapping("logout")
+    @ApiOperation(value = "用户退出登录", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BaseResponse logout() {
+        ShiroUtils.logout();
+        return BaseResponse.ok().build();
+    }
+
 }

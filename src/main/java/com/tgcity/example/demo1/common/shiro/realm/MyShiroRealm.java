@@ -11,7 +11,7 @@ package com.tgcity.example.demo1.common.shiro.realm;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
-import com.tgcity.example.demo1.utils.ShiroUtils;
+import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;

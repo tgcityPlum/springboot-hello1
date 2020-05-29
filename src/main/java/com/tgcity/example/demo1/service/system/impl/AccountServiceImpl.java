@@ -8,7 +8,7 @@ import com.tgcity.example.demo1.common.model.response.Message;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
 import com.tgcity.example.demo1.service.system.AccountService;
-import com.tgcity.example.demo1.utils.ShiroUtils;
+import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -16,9 +16,6 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author: TGCity

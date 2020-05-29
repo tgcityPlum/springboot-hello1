@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package com.tgcity.example.demo1.utils;
+package com.tgcity.example.demo1.common.utils;
 
 import com.tgcity.example.demo1.common.exception.BizException;
 import com.tgcity.example.demo1.common.model.response.Message;
