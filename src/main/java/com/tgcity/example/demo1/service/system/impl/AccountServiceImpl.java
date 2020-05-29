@@ -2,6 +2,7 @@ package com.tgcity.example.demo1.service.system.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
+import com.tgcity.example.demo1.common.model.request.system.ResetPasswordReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.Message;
 import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
@@ -126,5 +127,27 @@ public class AccountServiceImpl implements AccountService {
         UserInfoResponse userInfoResponse = UserInfoResponse.of();
         BeanUtils.copyProperties(user, userInfoResponse);
         return BaseResponse.ok(userInfoResponse);
+    }
+
+    @Override
+    public BaseResponse resetPassword(ResetPasswordReq request) {
+        //校验用户是否在线
+        AccountEntity user = (AccountEntity) SecurityUtils.getSubject().getPrincipal();
+        if (user == null) {
+            return BaseResponse.buildSuccess(Message.NOT_LOGGED_IN).build();
+        }
+        //校验老密码是否一致
+        String password = ShiroUtils.sha256(request.getOldPassword(), user.getPasswordEncryption());
+        if (!user.getPassword().equals(password)) {
+            return BaseResponse.buildSuccess(Message.PASSWORD_ERROR).build();
+        }
+        String salt = RandomStringUtils.randomAlphanumeric(20);
+        user.setPasswordEncryption(salt);
+        user.setPassword(ShiroUtils.sha256(request.getNewPassword(), salt));
+        int updateCount = accountMapper.updateById(user);
+        if (updateCount != 1) {
+            return BaseResponse.buildSuccess(Message.UPDATE_FAIL).build();
+        }
+        return BaseResponse.ok().build();
     }
 }

@@ -25,6 +25,7 @@ public enum Message {
     ACCOUNT_EXIST(400, "账号已存在"),
     ID_NUMBER_EXIST(400, "身份证号已存在"),
     PHONE_EXIST(400, "手机号已存在"),
+
     NOT_LOGGED_IN(401, "未登录"),
 
     INVALID_USERNAME_OR_PASSWORD(403, "用户名或密码错误"),
@@ -45,6 +46,9 @@ public enum Message {
     MANAGER_VILLAGE_MATCH_ERROR(404, "河长和村居不匹配"),
     TIME_SCOPE_ERROR(404, "时间范围错误"),
 
+    TWO_PASSWORD_EQUAL(405, "新密码和确认密码不一致"),
+
+    PASSWORD_ERROR(500, "旧密码输入错误"),
     HZZ_MAP_ERROR(500, "映射河长制数据出现错误"),
     UPDATE_FAIL(500, "更新失败"),
     DELETED_FAIL(500, "删除失败"),

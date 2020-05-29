@@ -1,6 +1,7 @@
 package com.tgcity.example.demo1.service.system;
 
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
+import com.tgcity.example.demo1.common.model.request.system.ResetPasswordReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
 import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
@@ -32,5 +33,12 @@ public interface AccountService {
      * @return BaseResponse<UserInfoResponse>
      */
     BaseResponse<UserInfoResponse> userInfo();
+
+    /**
+     * 4 修改密码
+     * @param request ResetPasswordReq
+     * @return BaseResponse
+     */
+    BaseResponse resetPassword(ResetPasswordReq request);
 
 }
