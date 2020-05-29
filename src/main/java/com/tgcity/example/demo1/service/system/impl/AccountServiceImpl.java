@@ -12,7 +12,6 @@ import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
 import com.tgcity.example.demo1.service.system.AccountService;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -31,12 +30,6 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
-    /**
-     * 注册的逻辑处理
-     *
-     * @param registerReq RegisterReq RegisterReq
-     * @return Long
-     */
     @Override
     public BaseResponse register(RegisterReq registerReq) {
         //校验账号信息
@@ -146,6 +139,23 @@ public class AccountServiceImpl implements AccountService {
         user.setPassword(ShiroUtils.sha256(request.getNewPassword(), salt));
         int updateCount = accountMapper.updateById(user);
         if (updateCount != 1) {
+            return BaseResponse.buildSuccess(Message.UPDATE_FAIL).build();
+        }
+        return BaseResponse.ok().build();
+    }
+
+    @Override
+    public BaseResponse resetInfo(UserInfoResponse request) {
+        AccountEntity user = (AccountEntity) SecurityUtils.getSubject().getPrincipal();
+        if (user == null) {
+            return BaseResponse.buildSuccess(Message.NOT_LOGGED_IN).build();
+        }
+        user.setNickName(request.getNickName());
+        user.setAvatar(request.getAvatar());
+        user.setPhone(request.getPhone());
+
+        int updateCount = accountMapper.updateById(user);
+        if (updateCount != 1){
             return BaseResponse.buildSuccess(Message.UPDATE_FAIL).build();
         }
         return BaseResponse.ok().build();

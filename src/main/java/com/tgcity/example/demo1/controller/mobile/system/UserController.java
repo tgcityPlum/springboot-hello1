@@ -7,6 +7,7 @@ import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
 import com.tgcity.example.demo1.service.system.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -40,7 +41,7 @@ public class UserController {
     /**
      * 2、修改用户密码
      */
-    @PutMapping("resetpassword")
+    @PutMapping("update/password")
     @ApiOperation(value = "修改用户密码", httpMethod = "PUT", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParam(name = "request", value = "请求体", required = true, dataType = "ResetPasswordReq")
     public BaseResponse resetPassword(@Valid @RequestBody ResetPasswordReq request) {
@@ -58,5 +59,11 @@ public class UserController {
     /**
      * 4、修改用户信息
      */
+    @PutMapping("update/info")
+    @ApiOperation(value = "修改用户信息", httpMethod = "PUT", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiModelProperty(name = "request", value = "请求体", dataType = "UserInfoResponse", required = true)
+    public BaseResponse resetInfo(@RequestBody UserInfoResponse request) {
+        return accountService.resetInfo(request);
+    }
 
 }

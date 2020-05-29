@@ -15,6 +15,7 @@ public interface AccountService {
 
     /**
      * 1 注册用户
+     *
      * @param registerReq RegisterReq
      * @return BaseResponse
      */
@@ -22,7 +23,8 @@ public interface AccountService {
 
     /**
      * 2 用户登录
-     * @param account 账号
+     *
+     * @param account  账号
      * @param password 密码
      * @return BaseResponse<LoginUserResponse>
      */
@@ -30,15 +32,23 @@ public interface AccountService {
 
     /**
      * 3 获取用户基本信息
+     *
      * @return BaseResponse<UserInfoResponse>
      */
     BaseResponse<UserInfoResponse> userInfo();
 
     /**
      * 4 修改密码
+     *
      * @param request ResetPasswordReq
      * @return BaseResponse
      */
     BaseResponse resetPassword(ResetPasswordReq request);
 
+    /**
+     * 5 修改用户信息
+     * @param request UserInfoResponse
+     * @return BaseResponse
+     */
+    BaseResponse resetInfo(UserInfoResponse request);
 }
