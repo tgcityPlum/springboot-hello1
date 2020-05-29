@@ -5,6 +5,7 @@ import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.Message;
+import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
 import com.tgcity.example.demo1.service.system.AccountService;
@@ -89,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public BaseResponse login(String account, String password) {
+    public BaseResponse<LoginUserResponse> login(String account, String password) {
         //登录（shiro）
         try {
             Subject subject = ShiroUtils.getSubject();
@@ -115,5 +116,16 @@ public class AccountServiceImpl implements AccountService {
         } catch (Exception e) {
             return BaseResponse.code(400).msg("网络异常,请联系管理员").build();
         }
+    }
+
+    @Override
+    public BaseResponse<UserInfoResponse> userInfo() {
+        AccountEntity user = (AccountEntity) SecurityUtils.getSubject().getPrincipal();
+        if (user == null) {
+            return BaseResponse.buildSuccess(Message.NOT_LOGGED_IN).build();
+        }
+        UserInfoResponse userInfoResponse = UserInfoResponse.of();
+        BeanUtils.copyProperties(user,userInfoResponse);
+        return BaseResponse.ok(userInfoResponse);
     }
 }

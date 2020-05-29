@@ -2,6 +2,8 @@ package com.tgcity.example.demo1.service.system;
 
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
+import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
+import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
 
 /**
  * @author: TGCity
@@ -21,7 +23,14 @@ public interface AccountService {
      * 2 用户登录
      * @param account 账号
      * @param password 密码
-     * @return BaseResponse
+     * @return BaseResponse<LoginUserResponse>
      */
-    BaseResponse login(String account, String password);
+    BaseResponse<LoginUserResponse> login(String account, String password);
+
+    /**
+     * 3 获取用户基本信息
+     * @return BaseResponse<UserInfoResponse>
+     */
+    BaseResponse<UserInfoResponse> userInfo();
+
 }

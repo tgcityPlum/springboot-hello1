@@ -1,6 +1,6 @@
 package com.tgcity.example.demo1.common.shiro.web;
 
-import com.tgcity.example.demo1.common.model.AccountVo;
+import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
@@ -12,21 +12,21 @@ import org.springframework.beans.BeanUtils;
  */
 public class WebContentUtil {
 
-    public static AccountVo getAccountInfo() {
-        AccountVo accountVo = AccountVo.of();
+    public static UserInfoResponse getAccountInfo() {
+        UserInfoResponse userInfoResponse = UserInfoResponse.of();
         AccountEntity user;
         try {
             user = (AccountEntity) SecurityUtils.getSubject().getPrincipal();
         } catch (UnavailableSecurityManagerException e) {
-            accountVo.setAccount("system");
-            return accountVo;
+            userInfoResponse.setAccount("system");
+            return userInfoResponse;
         }
         if (user != null) {
-            BeanUtils.copyProperties(user, accountVo);
+            BeanUtils.copyProperties(user, userInfoResponse);
         } else {
-            accountVo.setAccount("匿名");
+            userInfoResponse.setAccount("匿名");
         }
-        return accountVo;
+        return userInfoResponse;
     }
 
 }

@@ -1,8 +1,7 @@
 package com.tgcity.example.demo1.common.config;
 
-import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.tgcity.example.demo1.common.model.AccountVo;
+import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
 import com.tgcity.example.demo1.common.shiro.web.WebContentUtil;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         String userName = "匿名";
         //获取当前登录用户
-        AccountVo user = WebContentUtil.getAccountInfo();
+        UserInfoResponse user = WebContentUtil.getAccountInfo();
         if (user != null){
             userName = user.getAccount();
         }
@@ -51,7 +50,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         String userName = "匿名";
         //获取当前登录用户
-        AccountVo user = WebContentUtil.getAccountInfo();
+        UserInfoResponse user = WebContentUtil.getAccountInfo();
         if (user != null) {
             userName = user.getAccount();
         }

@@ -1,15 +1,15 @@
 package com.tgcity.example.demo1.controller.mobile.system;
 
-import com.alibaba.fastjson.JSONObject;
+import com.tgcity.example.demo1.common.model.response.BaseResponse;
+import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
+import com.tgcity.example.demo1.service.system.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author: TGCity
@@ -17,22 +17,21 @@ import java.util.Map;
  * @description 用户的Controller
  */
 @RestController
-@RequestMapping("/mobile/user")
+@RequestMapping("/mobile/system/user")
 @Api(tags = "4、用户模块")
 public class UserController {
 
-    @GetMapping("get/parameter/no/1")
-    @ApiOperation(value = "get无参测试", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String getData() {
-        Map<String, Object> map = new HashMap<>(2);
-        map.put("code", 1);
-        map.put("message", "get返回Data成功");
-        return JSONObject.toJSONString(map);
-    }
+    @Autowired
+    private AccountService accountService;
 
     /**
      * 1、获取用户信息
      */
+    @GetMapping("info")
+    @ApiOperation(value = "获取用户信息", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BaseResponse<UserInfoResponse> getInfo() {
+        return accountService.userInfo();
+    }
 
     /**
      * 2、修改用户密码
