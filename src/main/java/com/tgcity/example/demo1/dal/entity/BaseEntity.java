@@ -28,9 +28,9 @@ public class BaseEntity {
     /**
      * 乐观锁标记
      */
-    @Version
-    @TableField(value = "version")
-    private Long version;
+//    @Version
+//    @TableField(value = "version")
+//    private Long version;
     /**
      * 创建人
      */

@@ -1,6 +1,7 @@
 package com.tgcity.example.demo1.service.system.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.Message;
@@ -9,9 +10,15 @@ import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
 import com.tgcity.example.demo1.service.system.AccountService;
 import com.tgcity.example.demo1.utils.ShiroUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: TGCity
@@ -33,23 +40,17 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public BaseResponse register(RegisterReq registerReq) {
         //校验账号信息
-        if (StringUtils.isBlank(registerReq.getAccount())){
-            return BaseResponse.buildSuccess(Message.USER_ACCOUNT_NOT_EMPTY).build();
-        }
         Integer accountCount = accountMapper.selectCount(new QueryWrapper<AccountEntity>().eq("user_account", registerReq.getAccount()));
         if (accountCount > 0) {
             return BaseResponse.buildSuccess(Message.ACCOUNT_EXIST).build();
         }
-        //校验密码
-        if (StringUtils.isBlank(registerReq.getPassword())){
-            return BaseResponse.buildSuccess(Message.USER_PASSWORD_NOT_EMPTY).build();
-        }
+
         AccountEntity accountEntity = AccountEntity.of();
         //userId
         String userId;
 
         while (true) {
-            userId = RandomStringUtils.random(15,"abcde1234567890");
+            userId = RandomStringUtils.random(15, "abcde1234567890");
             Integer userIdCount = accountMapper.selectCount(new QueryWrapper<AccountEntity>().eq("user_id", userId));
             if (userIdCount == 0) {
                 break;
@@ -88,5 +89,34 @@ public class AccountServiceImpl implements AccountService {
         //处理平台
         accountMapper.insert(accountEntity);
         return BaseResponse.ok().build();
+    }
+
+    @Override
+    public BaseResponse login(String account, String password) {
+        //登录（shiro）
+        try {
+            Subject subject = ShiroUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(account, password);
+            subject.login(token);
+
+//            Map<String, Object> map = new HashMap<>(1);
+            //用户基本信息
+            AccountEntity user = (AccountEntity) SecurityUtils.getSubject().getPrincipal();
+            LoginUserResponse loginUserResponse = LoginUserResponse.of();
+            BeanUtils.copyProperties(user, loginUserResponse);
+//            map.put("account", loginUserResponse);
+
+            return BaseResponse.ok(loginUserResponse);
+        } catch (UnknownAccountException e) {
+            return BaseResponse.code(403).msg(e.getMessage()).build();
+        } catch (IncorrectCredentialsException e) {
+            return BaseResponse.buildSuccess(Message.INVALID_USERNAME_OR_PASSWORD).build();
+        } catch (LockedAccountException e) {
+            return BaseResponse.code(400).msg("账号已被锁定,请联系管理员").build();
+        } catch (AuthenticationException e) {
+            return BaseResponse.buildSuccess(Message.ACCOUNT_VERIFICATION_FAILED).build();
+        } catch (Exception e) {
+            return BaseResponse.code(400).msg("网络异常,请联系管理员").build();
+        }
     }
 }

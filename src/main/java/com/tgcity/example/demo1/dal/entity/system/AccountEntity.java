@@ -55,4 +55,8 @@ public class AccountEntity extends BaseEntity {
     @TableField(value = "platform")
     private String platform;
 
+    @ApiModelProperty(name = "open_id", value = "公众号id")
+    @TableField(value = "open_id")
+    private String openId;
+
 }

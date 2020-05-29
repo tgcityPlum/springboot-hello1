@@ -13,7 +13,15 @@ public interface AccountService {
     /**
      * 1 注册用户
      * @param registerReq RegisterReq
-     * @return Long 用户id
+     * @return BaseResponse
      */
     BaseResponse register(RegisterReq registerReq);
+
+    /**
+     * 2 用户登录
+     * @param account 账号
+     * @param password 密码
+     * @return BaseResponse
+     */
+    BaseResponse login(String account, String password);
 }

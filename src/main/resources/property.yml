@@ -1,0 +1,12 @@
+shiro:
+  loginUrl: ${shiro.loginUrl}
+  filterMapList: ${shiro.filterMapList}
+
+redis:
+  database: ${spring.redis.database}
+  host: ${spring.redis.host}
+  port: ${spring.redis.port}
+  password: ${spring.redis.password}
+
+
+
