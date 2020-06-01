@@ -25,6 +25,7 @@ public enum Message {
     ACCOUNT_EXIST(400, "账号已存在"),
     ID_NUMBER_EXIST(400, "身份证号已存在"),
     PHONE_EXIST(400, "手机号已存在"),
+    BASE64_NOT_EMPTY(400, "Base64格式图片为空"),
 
     NOT_LOGGED_IN(401, "未登录"),
 
@@ -40,7 +41,6 @@ public enum Message {
     AREA_NOT_FOUND(404, "该区域不存在"),
     SEWAGE_NOT_FOUND(404, "该污水厂不存在"),
     MANAGER_NOT_FOUND(404, "该河长不存在"),
-    BASE64_NOT_EMPTY(400, "Base64格式图片为空"),
     EXPORT_ERROR(404, "导出失败"),
     IMPORT_ERROR(404, "上传失败"),
     MANAGER_VILLAGE_MATCH_ERROR(404, "河长和村居不匹配"),

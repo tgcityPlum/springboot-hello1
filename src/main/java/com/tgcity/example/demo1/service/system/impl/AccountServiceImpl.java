@@ -10,8 +10,10 @@ import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
 import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
+import com.tgcity.example.demo1.service.common.FileService;
 import com.tgcity.example.demo1.service.system.AccountService;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -29,6 +31,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountMapper accountMapper;
+
+    @Autowired
+    private FileService fileService;
 
     @Override
     public BaseResponse register(RegisterReq registerReq) {
@@ -155,9 +160,32 @@ public class AccountServiceImpl implements AccountService {
         user.setPhone(request.getPhone());
 
         int updateCount = accountMapper.updateById(user);
-        if (updateCount != 1){
+        if (updateCount != 1) {
             return BaseResponse.buildSuccess(Message.UPDATE_FAIL).build();
         }
         return BaseResponse.ok().build();
+    }
+
+    @Override
+    public BaseResponse updateAvatar(String avatar) {
+        //校验用户是否登录
+        AccountEntity accountEntity = (AccountEntity) SecurityUtils.getSubject().getPrincipal();
+        if (accountEntity == null) {
+            return BaseResponse.buildSuccess(Message.NOT_LOGGED_IN).build();
+        }
+        if (StringUtils.isBlank(avatar)) {
+            return BaseResponse.buildSuccess(Message.BASE64_NOT_EMPTY).build();
+        }
+
+        BaseResponse<String> baseResponse = fileService.saveBase64Image(avatar);
+        if (baseResponse.getCode() == 200 && StringUtils.isNotBlank(baseResponse.getData())) {
+            //更新图片
+            accountEntity.setAvatar(baseResponse.getData());
+            Integer useCount = accountMapper.updateById(accountEntity);
+            if (useCount != 1) {
+                return BaseResponse.buildSuccess(Message.UPDATE_FAIL).build();
+            }
+        }
+        return baseResponse;
     }
 }

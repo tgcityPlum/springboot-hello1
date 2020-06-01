@@ -51,4 +51,11 @@ public interface AccountService {
      * @return BaseResponse
      */
     BaseResponse resetInfo(UserInfoResponse request);
+
+    /**
+     * 6 上传头像图片
+     * @param avatar String
+     * @return BaseResponse
+     */
+    BaseResponse updateAvatar(String avatar);
 }

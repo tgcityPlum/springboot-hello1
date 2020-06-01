@@ -44,3 +44,8 @@ spring:
         max-wait: -1ms
         min-idle: 0
       shutdown-timeout: 100ms
+
+file:
+  server:
+    path: /home/xietong/files/water/
+    url: http://192.168.15.36:10324/water/
