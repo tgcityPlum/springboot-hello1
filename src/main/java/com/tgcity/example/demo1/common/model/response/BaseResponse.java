@@ -17,12 +17,12 @@ public class BaseResponse<T> implements Serializable {
     /**
      * 状态码
      */
-    private int code;
+    private int status;
 
     /**
      * 返回信息
      */
-    private String message;
+    private String msg;
 
     /**
      * 数据模型
@@ -30,8 +30,8 @@ public class BaseResponse<T> implements Serializable {
     private T data;
 
     public BaseResponse(int code, String message, T data) {
-        this.code = code;
-        this.message = message;
+        this.status = code;
+        this.msg = message;
         this.data = data;
     }
 

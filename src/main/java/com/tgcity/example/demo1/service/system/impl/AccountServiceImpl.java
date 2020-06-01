@@ -178,7 +178,7 @@ public class AccountServiceImpl implements AccountService {
         }
 
         BaseResponse<String> baseResponse = fileService.saveBase64Image(avatar);
-        if (baseResponse.getCode() == 200 && StringUtils.isNotBlank(baseResponse.getData())) {
+        if (baseResponse.getStatus() == 200 && StringUtils.isNotBlank(baseResponse.getData())) {
             //更新图片
             accountEntity.setAvatar(baseResponse.getData());
             Integer useCount = accountMapper.updateById(accountEntity);
