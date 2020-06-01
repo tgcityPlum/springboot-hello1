@@ -1,7 +1,8 @@
 package com.tgcity.example.demo1.controller.backend.river;
 
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
-import com.tgcity.example.demo1.dal.entity.RiverEntity;
+import com.tgcity.example.demo1.dal.entity.river.ManagerEntity;
+import com.tgcity.example.demo1.dal.entity.river.RiverEntity;
 import com.tgcity.example.demo1.service.river.RiverService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author: TGCity
@@ -37,4 +36,15 @@ public class RiverController {
     public BaseResponse add(@RequestBody RiverEntity request) {
         return riverService.add(request);
     }
+
+    /**
+     * 2、添加河流管理者
+     */
+    @PostMapping("manager/add")
+    @ApiOperation(value = "添加河流", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParam(name = "request", value = "请求体", required = true, dataType = "ManagerEntity")
+    public BaseResponse managerAdd(@RequestBody ManagerEntity request) {
+        return riverService.managerAdd(request);
+    }
+
 }
