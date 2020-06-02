@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 /**
  * @author: TGCity
  * @create: 2020/6/1
- * @description 河流管理者的实体类
+ * @description 管理者的实体类
  */
 @Data
 @RequiredArgsConstructor(staticName = "of")
