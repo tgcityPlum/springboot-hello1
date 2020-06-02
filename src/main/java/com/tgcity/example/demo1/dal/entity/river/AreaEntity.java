@@ -21,6 +21,8 @@ import lombok.experimental.Accessors;
 @ApiModel(description = "区域实体类")
 public class AreaEntity extends BaseEntity {
 
+    private static final long serialVersionUID = 6L;
+
     @ApiModelProperty(name = "area_id", value = "区域id")
     @TableField(value = "area_id")
     private String areaId;

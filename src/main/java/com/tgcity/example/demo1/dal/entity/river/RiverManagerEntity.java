@@ -12,23 +12,27 @@ import lombok.experimental.Accessors;
 /**
  * @author: TGCity
  * @create: 2020/6/2
- * @description 河流区域实体类
+ * @description 河流河长实体类
  */
 @Data
-@Accessors(chain = true)
 @RequiredArgsConstructor(staticName = "of")
-@TableName("w_river_area")
-@ApiModel(description = "河流区域实体类")
-public class RiverAreaEntity extends BaseEntity {
+@Accessors(chain = true)
+@TableName("w_river_manager")
+@ApiModel(description = "河流河长实体类")
+public class RiverManagerEntity extends BaseEntity {
 
-    private static final long serialVersionUID = 4L;
-
-    @ApiModelProperty(name = "area_id", value = "区域id")
-    @TableField(value = "area_id")
-    private String areaId;
+    private static final long serialVersionUID = 8L;
 
     @ApiModelProperty(name = "river_id", value = "河流的id")
     @TableField(value = "river_id")
     private Integer riverId;
+
+    @ApiModelProperty(name = "level", value = "河长的等级|一级|二级|三级|四级")
+    @TableField(value = "level")
+    private Integer level;
+
+    @ApiModelProperty(name = "manager_id", value = "河长的id")
+    @TableField(value = "manager_id")
+    private String managerId;
 
 }

@@ -21,6 +21,8 @@ import lombok.experimental.Accessors;
 @ApiModel(description = "河流管理者的实体类")
 public class ManagerEntity extends BaseEntity {
 
+    private static final long serialVersionUID = 5L;
+
     @ApiModelProperty(name = "manager_id", value = "河长id")
     @TableField(value = "manager_id")
     private String managerId;

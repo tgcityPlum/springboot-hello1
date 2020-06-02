@@ -1,10 +1,7 @@
 package com.tgcity.example.demo1.service.river;
 
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
-import com.tgcity.example.demo1.dal.entity.river.AreaEntity;
-import com.tgcity.example.demo1.dal.entity.river.ManagerEntity;
-import com.tgcity.example.demo1.dal.entity.river.RiverAreaEntity;
-import com.tgcity.example.demo1.dal.entity.river.RiverEntity;
+import com.tgcity.example.demo1.dal.entity.river.*;
 
 /**
  * @author: TGCity
@@ -44,6 +41,14 @@ public interface RiverService {
      * @return BaseResponse
      */
     BaseResponse riverAreaAdd(RiverAreaEntity request);
+
+    /**
+     * 5、添加河流河长
+     *
+     * @param request RiverManagerEntity
+     * @return BaseResponse
+     */
+    BaseResponse riverManagerAdd(RiverManagerEntity request);
 
 
 }

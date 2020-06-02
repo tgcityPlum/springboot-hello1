@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * @author: TGCity
  * @create: 2020/6/1
- * @description 管理者数据库的接口
+ * @description 河长数据库的接口
  */
 @Repository
 public interface ManagerMapper extends BaseMapper<ManagerEntity> {
