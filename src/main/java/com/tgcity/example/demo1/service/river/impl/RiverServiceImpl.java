@@ -1,11 +1,14 @@
 package com.tgcity.example.demo1.service.river.impl;
 
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
+import com.tgcity.example.demo1.common.model.response.river.SearchRiverResponse;
 import com.tgcity.example.demo1.dal.entity.river.*;
 import com.tgcity.example.demo1.dal.mappers.river.*;
 import com.tgcity.example.demo1.service.river.RiverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author: TGCity
@@ -58,5 +61,10 @@ public class RiverServiceImpl implements RiverService {
     public BaseResponse riverManagerAdd(RiverManagerEntity request) {
         riverManagerMapper.insert(request);
         return BaseResponse.ok().build();
+    }
+
+    @Override
+    public BaseResponse<List<SearchRiverResponse>> searchRiver(String name) {
+        return BaseResponse.ok(riverMapper.searchRiver(name));
     }
 }

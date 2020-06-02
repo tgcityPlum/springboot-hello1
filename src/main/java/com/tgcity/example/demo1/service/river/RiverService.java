@@ -1,7 +1,10 @@
 package com.tgcity.example.demo1.service.river;
 
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
+import com.tgcity.example.demo1.common.model.response.river.SearchRiverResponse;
 import com.tgcity.example.demo1.dal.entity.river.*;
+
+import java.util.List;
 
 /**
  * @author: TGCity
@@ -49,6 +52,14 @@ public interface RiverService {
      * @return BaseResponse
      */
     BaseResponse riverManagerAdd(RiverManagerEntity request);
+
+    /**
+     * 6、搜索河流
+     *
+     * @param name String
+     * @return BaseResponse
+     */
+    BaseResponse<List<SearchRiverResponse>> searchRiver(String name);
 
 
 }

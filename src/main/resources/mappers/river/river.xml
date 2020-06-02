@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tgcity.example.demo1.dal.mappers.river.RiverMapper">
-
+    <select id="searchRiver" resultType="com.tgcity.example.demo1.common.model.response.river.SearchRiverResponse">
+        select
+            wr.id riverId,
+            wr.river_name riverName,
+            wa.area_id areaId,
+            wa.`name`
+        from
+            w_river wr
+        join
+            w_river_area wra ON wra.river_id=wr.id AND wra.deleted=false
+        join
+            w_area wa ON wa.area_id=wra.area_id AND wa.deleted=false
+        where
+            wr.river_name LIKE concat('%',#{name},'%')
+        AND
+            wr.deleted=false
+    </select>
 </mapper>
