@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地数据库
+Source Server         : tgcity
 Source Server Version : 80018
-Source Host           : 192.168.15.36:3306
+Source Host           : localhost:3306
 Source Database       : water
 
 Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2020-05-26 15:01:03
+Date: 2020-06-02 10:34:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;

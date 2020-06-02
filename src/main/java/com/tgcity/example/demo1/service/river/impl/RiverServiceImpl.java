@@ -3,9 +3,11 @@ package com.tgcity.example.demo1.service.river.impl;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.dal.entity.river.AreaEntity;
 import com.tgcity.example.demo1.dal.entity.river.ManagerEntity;
+import com.tgcity.example.demo1.dal.entity.river.RiverAreaEntity;
 import com.tgcity.example.demo1.dal.entity.river.RiverEntity;
 import com.tgcity.example.demo1.dal.mappers.river.AreaMapper;
 import com.tgcity.example.demo1.dal.mappers.river.ManagerMapper;
+import com.tgcity.example.demo1.dal.mappers.river.RiverAreaMapper;
 import com.tgcity.example.demo1.dal.mappers.river.RiverMapper;
 import com.tgcity.example.demo1.service.river.RiverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class RiverServiceImpl implements RiverService {
     @Autowired
     private AreaMapper areaMapper;
 
+    @Autowired
+    private RiverAreaMapper riverAreaMapper;
+
     @Override
     public BaseResponse add(RiverEntity entity) {
         riverMapper.insert(entity);
@@ -43,6 +48,12 @@ public class RiverServiceImpl implements RiverService {
     @Override
     public BaseResponse areaAdd(AreaEntity request) {
         areaMapper.insert(request);
+        return BaseResponse.ok().build();
+    }
+
+    @Override
+    public BaseResponse riverAreaAdd(RiverAreaEntity request) {
+        riverAreaMapper.insert(request);
         return BaseResponse.ok().build();
     }
 }

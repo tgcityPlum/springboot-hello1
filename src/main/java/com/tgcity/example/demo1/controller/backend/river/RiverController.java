@@ -3,6 +3,7 @@ package com.tgcity.example.demo1.controller.backend.river;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.dal.entity.river.AreaEntity;
 import com.tgcity.example.demo1.dal.entity.river.ManagerEntity;
+import com.tgcity.example.demo1.dal.entity.river.RiverAreaEntity;
 import com.tgcity.example.demo1.dal.entity.river.RiverEntity;
 import com.tgcity.example.demo1.service.river.RiverService;
 import io.swagger.annotations.Api;
@@ -56,6 +57,16 @@ public class RiverController {
     @ApiImplicitParam(name = "areaEntity",value = "请求体",dataType = "AreaEntity",required = true)
     public BaseResponse areaAdd(@RequestBody AreaEntity areaEntity){
         return riverService.areaAdd(areaEntity);
+    }
+
+    /**
+     * 4、添加河流区域
+     */
+    @PostMapping("riverArea/add")
+    @ApiOperation(value = "添加河流区域",httpMethod = "POST",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParam(name = "riverAreaEntity",value = "请求体",dataType = "RiverAreaEntity",required = true)
+    public BaseResponse areaAdd(@RequestBody RiverAreaEntity riverAreaEntity){
+        return riverService.riverAreaAdd(riverAreaEntity);
     }
 
 }

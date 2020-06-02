@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2020-06-01 18:07:47
+Date: 2020-06-02 10:34:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,8 +42,9 @@ CREATE TABLE `w_manager` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `ux_manager_id` (`manager_id`) USING BTREE,
   KEY `area_id` (`area_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1000132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPACT COMMENT='河长表';
+) ENGINE=InnoDB AUTO_INCREMENT=1000133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPACT COMMENT='河长表';
 
 -- ----------------------------
 -- Records of w_manager
 -- ----------------------------
+INSERT INTO `w_manager` VALUES ('1000132', '5ce24ef40c393a0f002568cc', '翁祖亮', '138****0710', '区委书记', '第一总河长', '副部级', '中共浦东新区委员委', '党委、政府', '000000000000000000000011', '党委主要领导', '', null, '\0', '匿名', '2020-06-01 18:45:15', '匿名', '2020-06-01 18:45:15', null);

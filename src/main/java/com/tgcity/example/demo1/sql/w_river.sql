@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2020-06-01 16:29:32
+Date: 2020-06-02 10:35:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,8 +34,9 @@ CREATE TABLE `w_river` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `comments` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49788 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPACT COMMENT='河流表对应的实体类';
+) ENGINE=InnoDB AUTO_INCREMENT=49789 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPACT COMMENT='河流表对应的实体类';
 
 -- ----------------------------
 -- Records of w_river
 -- ----------------------------
+INSERT INTO `w_river` VALUES ('49788', 'QP81', '油墩港', 'AFJ530063101181090000016820000', '', '市管', '河道', '\0', '匿名', '2020-06-01 17:19:06', '匿名', '2020-06-01 17:19:06', null);
