@@ -1,10 +1,13 @@
 package com.tgcity.example.demo1.controller.mobile.system;
 
+import com.alibaba.fastjson.JSON;
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.Message;
 import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
+import com.tgcity.example.demo1.common.utils.HttpClientUtils;
 import com.tgcity.example.demo1.common.utils.ShiroUtils;
+import com.tgcity.example.demo1.dal.entity.user.QQUserInfo;
 import com.tgcity.example.demo1.service.system.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -16,6 +19,7 @@ import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.apache.shiro.web.session.mgt.WebSessionKey;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +39,9 @@ public class LoginController {
 
     @Autowired
     private AccountService accountService;
+
+    @Value("${system.social.qq.app-id}")
+    public String appId;
 
     /**
      * 1、用户登录
@@ -89,5 +96,31 @@ public class LoginController {
             return BaseResponse.buildSuccess(Message.NOT_LOGGED_IN).build();
         }
     }
+
+    /**
+     * 5 QQ登录
+     */
+    @GetMapping("login/qq")
+    @ApiOperation(value = "QQ登录", httpMethod = "GET", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BaseResponse<LoginUserResponse> qqLogin(String accessToken, String openId) {
+        //获取QQUserInfo
+        QQUserInfo userInfo = accountService.getQQUserInfo(accessToken, openId);
+        if (userInfo == null) {
+            return BaseResponse.buildSuccess(Message.QQ_LOGIN_ERROR).build();
+        }else {
+            //校验openId是否绑定
+
+        }
+
+
+            LoginUserResponse loginUserResponse = LoginUserResponse.of();
+//            loginUserResponse.setAccount();
+            loginUserResponse.setAvatar(userInfo.getFigureurl_qq());
+            loginUserResponse.setNickName(userInfo.getNickname());
+
+
+        return BaseResponse.ok(null);
+    }
+
 
 }

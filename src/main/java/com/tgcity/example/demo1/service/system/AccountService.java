@@ -5,6 +5,7 @@ import com.tgcity.example.demo1.common.model.request.system.ResetPasswordReq;
 import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
 import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
+import com.tgcity.example.demo1.dal.entity.user.QQUserInfo;
 
 /**
  * @author: TGCity
@@ -58,4 +59,14 @@ public interface AccountService {
      * @return BaseResponse
      */
     BaseResponse updateAvatar(String avatar);
+
+    /**
+     * 7 获取QQ用户信息
+     * @param accessToken String
+     * @param openId String
+     * @return QQUserInfo
+     */
+    QQUserInfo getQQUserInfo(String accessToken, String openId);
+
+
 }

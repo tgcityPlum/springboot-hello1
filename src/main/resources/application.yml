@@ -49,3 +49,11 @@ file:
   server:
     path: /home/xietong/files/water/
     url: http://192.168.15.36:10324/water/
+
+system:
+  # 第三方配置
+  social:
+    qq:
+      app-id: 1109800547
+      app-secret: Xj8K4EyI1Io1eqdk
+      providerId: callback.do

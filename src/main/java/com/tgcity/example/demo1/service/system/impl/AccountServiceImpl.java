@@ -1,5 +1,6 @@
 package com.tgcity.example.demo1.service.system.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tgcity.example.demo1.common.model.request.system.RegisterReq;
 import com.tgcity.example.demo1.common.model.request.system.ResetPasswordReq;
@@ -7,8 +8,10 @@ import com.tgcity.example.demo1.common.model.response.BaseResponse;
 import com.tgcity.example.demo1.common.model.response.Message;
 import com.tgcity.example.demo1.common.model.response.system.LoginUserResponse;
 import com.tgcity.example.demo1.common.model.response.system.UserInfoResponse;
+import com.tgcity.example.demo1.common.utils.HttpClientUtils;
 import com.tgcity.example.demo1.common.utils.ShiroUtils;
 import com.tgcity.example.demo1.dal.entity.system.AccountEntity;
+import com.tgcity.example.demo1.dal.entity.user.QQUserInfo;
 import com.tgcity.example.demo1.dal.mappers.system.AccountMapper;
 import com.tgcity.example.demo1.service.common.FileService;
 import com.tgcity.example.demo1.service.system.AccountService;
@@ -19,6 +22,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,6 +38,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private FileService fileService;
+
+    @Value("${system.social.qq.app-id}")
+    public String appId;
 
     @Override
     public BaseResponse register(RegisterReq registerReq) {
@@ -188,4 +195,20 @@ public class AccountServiceImpl implements AccountService {
         }
         return baseResponse;
     }
+
+    @Override
+    public QQUserInfo getQQUserInfo(String accessToken, String openId) {
+        StringBuilder url = new StringBuilder("https://graph.qq.com/user/get_user_info?");
+        url.append("access_token=" + accessToken);
+        url.append("&oauth_consumer_key=" + appId);
+        url.append("&openid=" + openId);
+        // 获取qq相关数据
+        try {
+            return JSON.parseObject(HttpClientUtils.get(url.toString(), "UTF-8"), QQUserInfo.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

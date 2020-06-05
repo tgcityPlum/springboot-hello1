@@ -54,6 +54,7 @@ public enum Message {
     DELETED_FAIL(500, "删除失败"),
     CREATED_FAIL(500, "添加失败"),
     SYSTEM_ERROR(500, "系统异常"),
+    QQ_LOGIN_ERROR(500, "qq获取信息异常"),
     ;
 
     /**
