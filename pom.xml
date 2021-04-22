@@ -25,7 +25,7 @@
         <commons-pool2.version>2.6.2</commons-pool2.version>
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
         <druid.version>1.1.17</druid.version>
-        <shiro.version>1.4.1</shiro.version>
+        <shiro.version>1.7.1</shiro.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <thumbnailator.version>0.4.8</thumbnailator.version>
     </properties>
